@@ -1,6 +1,7 @@
 import { createCommand } from "../core/create-command";
 import { CommandLineArgsError } from "../errors";
 import * as metrics from "../metrics";
+import { loadTOML } from "./load-toml";
 import { listScopes, login, logout, validateScopeKeys } from "./user";
 import { whoami } from "./whoami";
 
@@ -95,6 +96,26 @@ export const logoutCommand = createCommand({
 		metrics.sendMetricsEvent("logout user", {
 			sendMetrics: config.send_metrics,
 		});
+	},
+});
+
+export const loadTOMLCommand = createCommand({
+	metadata: {
+		description: "🔍 Load a TOML file",
+		owner: "Workers: Authoring and Testing",
+		status: "stable",
+	},
+	behaviour: {
+		printConfigWarnings: false,
+	},
+	args: {
+		file: {
+			type: "string",
+			describe: "The TOML file to load",
+		},
+	},
+	async handler(args) {
+		loadTOML(args.file!);
 	},
 });
 
