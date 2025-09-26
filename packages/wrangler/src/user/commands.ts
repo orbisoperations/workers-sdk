@@ -1,7 +1,7 @@
 import { createCommand } from "../core/create-command";
 import { CommandLineArgsError } from "../errors";
 import * as metrics from "../metrics";
-import { loadTOML } from "./load-toml";
+import { loadTOML, showTOML } from "./load-toml";
 import { listScopes, login, logout, validateScopeKeys } from "./user";
 import { whoami } from "./whoami";
 
@@ -116,6 +116,20 @@ export const loadTOMLCommand = createCommand({
 	},
 	async handler(args) {
 		loadTOML(args.file!);
+	},
+});
+
+export const showTOMLCommand = createCommand({
+	metadata: {
+		description: "🔍 Show the TOML file",
+		owner: "Workers: Authoring and Testing",
+		status: "stable",
+	},
+	behaviour: {
+		printConfigWarnings: false,
+	},
+	async handler() {
+		showTOML();
 	},
 });
 

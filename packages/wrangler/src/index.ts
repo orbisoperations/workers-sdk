@@ -300,6 +300,7 @@ import {
 	loadTOMLCommand,
 	loginCommand,
 	logoutCommand,
+	showTOMLCommand,
 	whoamiCommand,
 } from "./user/commands";
 import { whoami } from "./user/whoami";
@@ -1538,6 +1539,14 @@ export function createCLIParser(argv: string[]) {
 		},
 	]);
 	registry.registerNamespace("load-toml");
+
+	registry.define([
+		{
+			command: "wrangler show-toml",
+			definition: showTOMLCommand,
+		},
+	]);
+	registry.registerNamespace("show-toml");
 
 	registry.define([
 		{
