@@ -296,7 +296,12 @@ import { tailCommand } from "./tail";
 import { triggersDeployCommand, triggersNamespace } from "./triggers";
 import { typesCommand } from "./type-generation";
 import { getAuthFromEnv } from "./user";
-import { loginCommand, logoutCommand, whoamiCommand } from "./user/commands";
+import {
+	loadTOMLCommand,
+	loginCommand,
+	logoutCommand,
+	whoamiCommand,
+} from "./user/commands";
 import { whoami } from "./user/whoami";
 import { betaCmdColor, proxy } from "./utils/constants";
 import { debugLogFilepath } from "./utils/log-file";
@@ -1525,6 +1530,14 @@ export function createCLIParser(argv: string[]) {
 		},
 	]);
 	registry.registerNamespace("whoami");
+
+	registry.define([
+		{
+			command: "wrangler load-toml",
+			definition: loadTOMLCommand,
+		},
+	]);
+	registry.registerNamespace("load-toml");
 
 	registry.define([
 		{
